@@ -17,7 +17,7 @@ class ImageLoader: UIImageView {
     private var spinType: SpinnerType!
     
     // MARK: - Public Methods
-    func loadImage(from url: String, isSpin: Bool = false, spinSize: Int = 20, spinType: SpinnerType = .spinner, completion: (() -> Void)? = nil) {
+    func loadImage(from url: String, isSpin: Bool = false, spinSize: Int = 20, spinType: SpinnerType = .multicolorSpinner, completion: (() -> Void)? = nil) {
         self.isSpin = isSpin
         self.spinSize = spinSize
         self.spinType = spinType
@@ -86,7 +86,11 @@ class ImageLoader: UIImageView {
         case .spinner:
             isStart
             ? spinner.startSpinner(in: self, size: spinSize)
-            : spinner.stopSpinner(in: self)
+            : spinner.stopSpinner()
+        case .multicolorSpinner:
+            isStart
+            ? spinner.startMulticolorSpinner(in: self, size: spinSize)
+            : spinner.stopMulticolorSpinner()
         default:
             break
         }
