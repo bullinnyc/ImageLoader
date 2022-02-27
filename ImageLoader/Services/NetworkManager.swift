@@ -10,7 +10,6 @@ import Foundation
 enum NetworkError: String, Error {
     case badURL = "Bad URL or nil"
     case noData = "Unable to get data"
-    case noDecodedData = "The data couldn’t be read because it isn’t in the correct format"
 }
 
 class NetworkManager {
