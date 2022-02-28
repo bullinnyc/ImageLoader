@@ -45,9 +45,12 @@ extension SpinnerMagazine {
         view.addSubview(spinner)
     }
     
-    func stopSpinner() {
-        spinner.layer.removeAnimation(forKey: "spinAnimation")
-        spinner.removeFromSuperview()
+    func stopSpinner(in view: UIView) {
+        view.subviews.forEach { subView in
+            guard view.subviews.contains(spinner) else { return }
+            subView.layer.removeAnimation(forKey: "spinAnimation")
+            subView.removeFromSuperview()
+        }
     }
     
     // MARK: Private Methods

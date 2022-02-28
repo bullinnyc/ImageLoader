@@ -86,7 +86,7 @@ class ImageLoader: UIImageView {
         case .spinner:
             isStart
             ? spinner.startSpinner(in: self, size: spinSize)
-            : spinner.stopSpinner()
+            : spinner.stopSpinner(in: self)
         case .multicolorSpinner:
             isStart
             ? spinner.startMulticolorSpinner(in: self, size: spinSize)
