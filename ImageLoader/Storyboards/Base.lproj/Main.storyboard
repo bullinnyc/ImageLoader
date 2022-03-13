@@ -56,9 +56,9 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="fmw-9t-i03" firstAttribute="centerX" secondItem="EJb-nl-hEm" secondAttribute="centerX" id="CzB-Bw-G9f"/>
                                     <constraint firstItem="fmw-9t-i03" firstAttribute="leading" secondItem="EJb-nl-hEm" secondAttribute="leading" constant="16" id="Njk-Id-6sn"/>
                                     <constraint firstAttribute="trailing" secondItem="fmw-9t-i03" secondAttribute="trailing" constant="16" id="S8q-Bp-afA"/>
-                                    <constraint firstItem="fmw-9t-i03" firstAttribute="width" secondItem="EJb-nl-hEm" secondAttribute="width" multiplier="0.9" id="jmn-ir-1mP"/>
                                     <constraint firstAttribute="bottom" secondItem="fmw-9t-i03" secondAttribute="bottom" constant="16" id="uRg-6I-uWR"/>
                                     <constraint firstItem="fmw-9t-i03" firstAttribute="top" secondItem="EJb-nl-hEm" secondAttribute="top" constant="16" id="yhZ-JH-u6d"/>
                                 </constraints>

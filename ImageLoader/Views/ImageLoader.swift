@@ -12,16 +12,8 @@ class ImageLoader: UIImageView {
     private let cache = TemporaryImageCache.shared
     private let spinner = SpinnerMagazine()
     
-    private var isSpin: Bool!
-    private var spinSize: Int!
-    private var spinType: SpinnerType!
-    
     // MARK: - Public Methods
-    func loadImage(from url: String, isSpin: Bool = false, spinSize: Int = 20, spinType: SpinnerType = .multicolorSpinner, completion: (() -> Void)? = nil) {
-        self.isSpin = isSpin
-        self.spinSize = spinSize
-        self.spinType = spinType
-        
+    func loadImage(from url: String, isSpin: Bool = false, spinSize: CGFloat = 20, spinType: SpinnerType = .multicolorSpinner, completion: (() -> Void)? = nil) {
         // Check image to cache
         if let cachedImage = cache[url] {
             image = cachedImage
@@ -36,7 +28,7 @@ class ImageLoader: UIImageView {
         }
         
         // Show spinner
-        setSpinner(isStart: true)
+        setSpinner(isStart: true, isSpin: isSpin, spinSize: spinSize, spinType: spinType)
         
         // Get image from URL
         NetworkManager.shared.fetchImageData(from: url) { [unowned self] result in
@@ -45,7 +37,7 @@ class ImageLoader: UIImageView {
                 let uiImage = self.getImageFromData(from: data)
                 self.image = uiImage
                 self.cache[url] = uiImage
-                self.setSpinner()
+                self.setSpinner(isSpin: isSpin, spinSize: spinSize, spinType: spinType)
                 print("Image loaded from URL")
                 
                 guard let completion = completion else { return }
@@ -55,7 +47,7 @@ class ImageLoader: UIImageView {
                 
                 DispatchQueue.main.async {
                     self.image = UIImage(systemName: "xmark.icloud.fill")
-                    self.setSpinner()
+                    self.setSpinner(isSpin: isSpin, spinSize: spinSize, spinType: spinType)
                     print("Image from resources")
                     
                     guard let completion = completion else { return }
@@ -71,7 +63,7 @@ class ImageLoader: UIImageView {
         return image
     }
     
-    private func setSpinner(isStart: Bool = false) {
+    private func setSpinner(isStart: Bool = false, isSpin: Bool, spinSize: CGFloat, spinType: SpinnerType) {
         guard isSpin else { return }
         
         switch spinType {
@@ -91,8 +83,6 @@ class ImageLoader: UIImageView {
             isStart
             ? spinner.startMulticolorSpinner(in: self, size: spinSize)
             : spinner.stopMulticolorSpinner()
-        default:
-            break
         }
     }
 }
