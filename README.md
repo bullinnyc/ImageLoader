@@ -52,3 +52,6 @@ class ViewController: UIViewController {
     }
 }
 ```
+
+## Requirements
+- [Swift 5](https://developer.apple.com/swift/)
