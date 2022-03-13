@@ -41,4 +41,5 @@ class ViewController: UIViewController {
             // ...
         }
     }
+}
 ```
