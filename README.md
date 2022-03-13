@@ -26,10 +26,19 @@ class ViewController: UIViewController {
         firstImageView.loadImage(from: "https://", isSpin: true)
         
         // With selected spinner
-        secondImageView.loadImage(from: "https://", isSpin: true, spinType: .activityIndicatorMedium)
+        secondImageView.loadImage(
+            from: "https://", 
+            isSpin: true, 
+            spinType: .activityIndicatorMedium
+        )
         
         // With selected spinner and completion
-        thirdImageView.loadImage(from: "https://", isSpin: true, spinSize: 20, spinType: .multicolorSpinner) {
+        thirdImageView.loadImage(
+            from: "https://", 
+            isSpin: true, 
+            spinSize: 20, 
+            spinType: .multicolorSpinner
+        ) {
             // ...
         }
         
