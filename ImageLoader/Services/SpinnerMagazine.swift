@@ -50,9 +50,12 @@ class SpinnerMagazine {
 // MARK: - Ext. Spinner from resources
 extension SpinnerMagazine {
     func startSpinner(in view: UIView, size: CGFloat) {
-        spinner = UIImageView(image: UIImage(named: "spinner"))
+        guard let image = UIImage(named: "spinner") else { return }
+        let templateImage = image.withRenderingMode(.alwaysTemplate)
+        
+        spinner = UIImageView(image: templateImage)
         spinner.frame = CGRect(x: 0, y: 0, width: size, height: size)
-        spinner.center = CGPoint(x: view.bounds.midX, y: view.bounds.midY)
+        spinner.tintColor = .systemBlue // Your color
         animateRotation(duration: 0.5)
         view.addSubview(spinner)
         
@@ -81,7 +84,7 @@ extension SpinnerMagazine {
 extension SpinnerMagazine {
     func startMulticolorSpinner(in view: UIView, size: CGFloat) {
         multicolorSpinner = MulticolorSpinnerView(
-            colors: [.red, .systemGreen, .systemBlue],
+            colors: [.red, .systemGreen, .systemBlue], // Your colors
             lineWidth: CGFloat(size) * 0.10
         )
         
