@@ -25,8 +25,8 @@ class SpinnerMagazine {
         activityIndicator = UIActivityIndicatorView(style: style)
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        view.addSubview(activityIndicator)
         
+        view.addSubview(activityIndicator)
         setupConstraints(subView: activityIndicator, parentView: view)
     }
     
@@ -56,8 +56,14 @@ extension SpinnerMagazine {
         spinner = UIImageView(image: templateImage)
         spinner.frame = CGRect(x: 0, y: 0, width: size, height: size)
         spinner.tintColor = .systemBlue // Your color
-        animateRotation(duration: 0.5)
+        
         view.addSubview(spinner)
+        view.subviews.forEach { subView in
+            guard view.subviews.contains(spinner) else { return }
+            
+            let rotation = animateRotation(duration: 0.5)
+            subView.layer.add(rotation, forKey: "spinAnimation")
+        }
         
         setupConstraints(subView: spinner, parentView: view, size: size)
     }
@@ -65,18 +71,19 @@ extension SpinnerMagazine {
     func stopSpinner(in view: UIView) {
         view.subviews.forEach { subView in
             guard view.subviews.contains(spinner) else { return }
+            
             subView.layer.removeAnimation(forKey: "spinAnimation")
             subView.removeFromSuperview()
         }
     }
     
-    private func animateRotation(duration: Double) {
+    private func animateRotation(duration: Double) -> CABasicAnimation {
         let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotation.fromValue = 0
         rotation.toValue = 2 * Double.pi
         rotation.duration = duration
         rotation.repeatCount = .infinity
-        spinner.layer.add(rotation, forKey: "spinAnimation")
+        return rotation
     }
 }
 
@@ -90,8 +97,8 @@ extension SpinnerMagazine {
         
         multicolorSpinner.frame = CGRect(x: 0, y: 0, width: size, height: size)
         multicolorSpinner.isAnimating = true
-        view.addSubview(multicolorSpinner)
         
+        view.addSubview(multicolorSpinner)
         setupConstraints(subView: multicolorSpinner, parentView: view, size: size)
     }
     
