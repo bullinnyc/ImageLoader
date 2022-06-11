@@ -59,18 +59,17 @@ extension SpinnerMagazine {
         
         view.addSubview(spinner)
         view.subviews.forEach { subView in
-            guard view.subviews.contains(spinner) else { return }
+            guard subView.isDescendant(of: spinner) else { return }
             
             let rotation = animateRotation(duration: 0.5)
             subView.layer.add(rotation, forKey: "spinAnimation")
+            setupConstraints(subView: spinner, parentView: view, size: size)
         }
-        
-        setupConstraints(subView: spinner, parentView: view, size: size)
     }
     
     func stopSpinner(in view: UIView) {
         view.subviews.forEach { subView in
-            guard view.subviews.contains(spinner) else { return }
+            guard subView.isDescendant(of: spinner) else { return }
             
             subView.layer.removeAnimation(forKey: "spinAnimation")
             subView.removeFromSuperview()
